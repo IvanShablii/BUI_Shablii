@@ -8,21 +8,19 @@ for (i = 0; i < description.length; ++i) {
 }
 
 // ----- let's convert text into array of separate words
-// allText = allText.toLowerCase();
 let allWords = allText.match(/\b(\w+)\b/g);
 
 // ----- let's create array of words, that are used at least twice
 let wordsToRecolor = allWords.filter(
   (value, index, self) => self.indexOf(value) === index
 );
-console.log(wordsToRecolor);
 
 // ----- let's make this words red
 for (i = 0; i < description.length; ++i) {
   let arr = description[i].innerHTML;
   for (j = 0; j < wordsToRecolor.length; ++j) {
     let word = wordsToRecolor[j];
-    let wordRegex = new RegExp("\\b" + word + "\\b", "g");
+    let wordRegex = new RegExp("\\b" + word + "\\b", "g"); // to replace whole words only, not part of it
     if (arr.includes(word)) {
       arr = arr.replace(
         wordRegex,
