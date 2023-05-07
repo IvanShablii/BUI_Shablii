@@ -18,5 +18,5 @@ function checkLetterPosition(word, index, char) {
    return char === word[index]; //+ " , " + char + equalOrNot + word[index] 
 }
 
- alert(checkLetterPosition("gogi", 3, "f")); // false
-//  alert(checkLetterPosition("gogi", 3, "i")) // true
+//  alert(checkLetterPosition("gogi", 3, "f")); // false
+ alert(checkLetterPosition("gogi", 3, "i")) // true

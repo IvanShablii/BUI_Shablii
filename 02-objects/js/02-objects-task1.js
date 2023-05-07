@@ -1,4 +1,5 @@
 /* Написати функцію without, котра повертає новий об'єкт без вказаних значень.
+https://github.com/BUI-studies/frontend-exercises/blob/master/js-homeworks/02-objects.md
 
 Arguments:
 object - будь-який обь'єкт
