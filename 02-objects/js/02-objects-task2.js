@@ -39,14 +39,14 @@ function profileMagazine(label, schedule, products = []) {
 
   const makeBlackFriday = function (discount) {
     if (discount <= 0 || discount >= 1) {
-        console.error("wrong discount argument. Expected between 0 and 1");
-        return null
+      console.warn("DO'H! Wrong discount argument. Expected between 0 and 1");
+      return null;
     } else {
-        for (const key in this.products) {
+      for (const key in this.products) {
         this.products[key].price *= discount;
       }
     }
-    return this // в умові ретурт відсутній, але тоді буде undefined після виклику методу
+    return this; // в умові ретурт відсутній, але тоді буде undefined після виклику методу
   };
 
   /**
@@ -54,12 +54,12 @@ function profileMagazine(label, schedule, products = []) {
    * @param {Array} store - массив товарів на складі, тоді як products - товари в магазині
    */
   const verifySore = function (store = []) {
-    let unmatchedProductsString = '';
+    let unmatchedProductsString = "";
     for (const key in this.products) {
       if (store[key].count !== products[key].count) {
-        unmatchedProductsString += Object.assign(this.products[key].title);
-        this.products[key].count = Object.assign(store[key].count);
-      } 
+        unmatchedProductsString += " ," + this.products[key].title;
+        this.products[key].count = store[key].count;
+      }
     }
     return unmatchedProductsString;
   };
@@ -71,21 +71,37 @@ function profileMagazine(label, schedule, products = []) {
 
     makeBlackFriday,
     verifySore,
-    
-  }
-
+  };
 }
 
-
-
 // --- TEST DATA TO CHECK profileMagazine function---
-// const stores = profileMagazine('rozetka', '8-22', [{title:'phone', count:13, price:250}, {title:'camera', count:3, price:200}]);
-// profileMagazine('moyo', '8-22', {title:'TV', count:25, price:150}),
-// profileMagazine('silpo', '8-22', {title:'kanapka', count:250, price:1.5}),
-// console.log(stores)
+// const stores = profileMagazine("rozetka", "8-22", [
+//   { title: "phone", count: 13, price: 250 },
+//   { title: "camera", count: 3, price: 200 },
+// ]);
+// profileMagazine("moyo", "8-22", { title: "TV", count: 25, price: 150 }),
+//   profileMagazine("silpo", "8-22", {
+//     title: "kanapka",
+//     count: 250,
+//     price: 1.5,
+//   }),
+//   console.log(stores);
 
 // --- TEST DATA TO CHECK makeBlackFriday method ---
-// const stores = profileMagazine('rozetka', '8-22', [{title:'phone', count:13, price:250}, {title:'camera', count:3, price:200}]).makeBlackFriday(0.5);
+// const stores = profileMagazine("rozetka", "8-22", [
+//   { title: "phone", count: 13, price: 250 },
+//   { title: "camera", count: 3, price: 200 },
+// ]);
+// stores.makeBlackFriday(1.5);
+// console.log(stores);
 
 // --- TEST DATA TO CHECK verifySore method ---
-const stores = profileMagazine('rozetka', '8-22', [{title:'phone', count:13, price:250}, {title:'camera', count:3, price:200}]).verifySore([{title:'phone', count:222, price:250}, {title:'camera', count:31, price:200}]);
+const stores = profileMagazine("rozetka", "8-22", [
+  { title: "phone", count: 13, price: 250 },
+  { title: "camera", count: 3, price: 200 },
+]);
+stores.verifySore([
+  { title: "phone", count: 77, price: 250 },
+  { title: "camera", count: 8, price: 200 },
+]);
+console.log(stores);

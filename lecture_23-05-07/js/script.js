@@ -1,10 +1,12 @@
 // --STEP-1-- let's get all text from all nodes
 
-const description = Array.from(
-  document.getElementsByClassName("playlist__description")[0].children
+const allDescriptions = Array.from(
+  document.getElementsByClassName("playlist__description")
 );
+// const description = Array.from(allDescriptions[0].children);
 
-let allText = description.map((node) => node.innerText).toString();
+// let allText = description.map((node) => node.innerText).toString();
+const allText = allDescriptions[0].innerText;
 
 // --STEP-2-- let's convert text into array of separate words
 
@@ -13,8 +15,10 @@ let allWords = allText.match(/\b(\w+)\b/g);
 // --STEP-3-- let's create array of words, that are used at least twice
 
 let wordsToRecolor = allWords.filter(
-  (value, index, self) => self.indexOf(value) === index
+  (word, _, self) =>
+    self.filter((w) => w.toLowerCase() === word.toLowerCase()).length > 1
 );
+console.log(wordsToRecolor);
 
 // --STEP-4-- create function to convert word to regex
 function toRegexp(word) {
@@ -34,11 +38,19 @@ function recolorString(str) {
   return str;
 }
 
-// --STEP-6-1- get innerHTML from nodes and store it in arr
-let arr = description.map((node) => node.innerHTML);
-
-// --STEP-6-2- recolor each word in each node if it repeats at least once
-let newArr = arr.map((node) => recolorString(node));
-
 // --STEP-6-2- replace text in nodes
-description.map((node, index) => (node.innerHTML = newArr[index]));
+allDescriptions.forEach(
+  (node, index) => (node.innerHTML = recolorString(node.innerHTML))
+);
+
+// allWords
+//   .map((word, _, self) => {
+//     const dublicates = self.filter((w) => w === word);
+
+//     if (dublicates.length > 1) {
+//       return `<span style="color:red">${word}</span>`;
+//     } else {
+//       return word;
+//     }
+//   })
+//   .join(" ");
