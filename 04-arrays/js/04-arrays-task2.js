@@ -7,9 +7,7 @@ Return value
 
 const reverseArray = (array) => {
   let newArr = [];
-  for (let i = 0; i < array.length; i++) {
-    newArr.unshift(array[i]);
-  }
+  array.forEach(a => newArr.unshift(a))
   return newArr;
 };
 
