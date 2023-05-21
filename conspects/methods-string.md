@@ -13,8 +13,6 @@
 
 > [`.length`](#length-повертає-довжину-рядка) - повертає довжину рядка
 
-> [`.charAt(index)`](#charatindex-повертає-символ-за-вказаним-індексом) - повертає символ за вказаним індексом
-
 ## ...true / false
 
 > [`.includes(searchString, ?position)`](#includessearchstring-position-перевіряє-чи-містить-текст-фразу-та-повертає-true-чи-false) - перевіряє чи містить текст фразу та повертає true чи false. Case sensitive пошук
@@ -30,6 +28,8 @@
 > [`.indexOf(searchString, ?position)`](#indexofsearchstring-position-шукає-searchstring-в-рядку-та-повертає-індекс-з-якого-починається-searchstring-перший) - шукає substring в рядку та повертає індекс, з якого починається substring (перший)
 
 > [`.lastIndexOf(searchString, ?position)`](#lastindexofsearchstring-position---повертає-перший-індекс-першої-searchstring-з-кінця) - повертає перший індекс першої searchString з кінця
+
+> [`.charAt(index)`](#charatindex-повертає-символ-за-вказаним-індексом) - повертає символ за вказаним індексом
 
 ## ...новий рядок
 
