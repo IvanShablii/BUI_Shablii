@@ -1,0 +1,40 @@
+* {
+  font-family: system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+main {
+  width: min(80ch, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.preloader {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preloader__figure {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 100%;
+  border: 3px solid #fff;
+  border-left-color: transparent;
+
+  animation: preloader infinite 1s linear;
+}
+
+@keyframes preloader {
+  to {
+    transform: rotate(360deg);
+  }
+}

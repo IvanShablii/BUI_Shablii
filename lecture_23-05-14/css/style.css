@@ -1,0 +1,97 @@
+main {
+  width: min(80ch, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.login {
+  margin: 5rem 0;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem #ccc;
+}
+
+.login__error {
+  color: red;
+  font-weight: bold;
+}
+
+.login__input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.login__input--invalid {
+  border-color: red;
+}
+
+.login__input--invalid:focus {
+  border: none;
+  outline: 2px solid red;
+}
+
+.login__button {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.booking {
+  margin: 5rem 0;
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem #ccc;
+}
+
+.booking__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.booking__seat {
+  cursor: pointer;
+  width: 1rem;
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.booking__seat--selected {
+  background-color: #ccc;
+}
+
+.booking__seat--selected:hover {
+  background-color: #ccc;
+}
+
+.booking__seat--selected:active {
+  background-color: #ccc;
+}
+
+.booking__btn {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #ccc;
+  cursor: pointer;
+}
