@@ -1,0 +1,58 @@
+* {
+  font-family: system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body > main {
+  width: min(80ch, calc(100% - 2rem));
+  margin-inline: auto;
+  padding: 3em;
+  display: block;
+}
+
+.catalog {
+  display: inline-flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  /* width: 800px; */
+  margin-top: 3em;
+}
+
+.catalog > div {
+  display: block;
+  flex-direction: column;
+  width: 250px;
+}
+
+img {
+  width: 100%;
+}
+
+.title,
+.price {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: violet;
+}
+
+.category,
+.description,
+.rating,
+.ratingCount {
+  font-size: 0.8em;
+}
+
+.category {
+  display: inline-flex;
+  width: auto;
+  padding: 0.5em;
+  border: 1px solid violet;
+  border-radius: 0.5em;
+}
+
+p {
+  margin-top: 0.5em;
+}
