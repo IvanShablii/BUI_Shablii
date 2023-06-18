@@ -72,6 +72,7 @@ Slider.prototype.navigation = function () {
 
     if (e.target === this.btnPrew) {
       // left button navigation
+      // Є чуття, що можна простіше записати
       currentImage.classList.remove("slider__item--active");
       if (
         currentImage.previousSibling != null &&
@@ -79,6 +80,7 @@ Slider.prototype.navigation = function () {
       ) {
         currentImage.previousSibling.classList.add("slider__item--active");
       } else {
+        // Тут теж виглядає перегружено. В паренті ще кнопки запхані, тому шукаю по класу останній.
         Array.from(this.wrapper.children)
           .findLast((e) => e.classList.contains("slider__item"))
           .classList.add("slider__item--active");
@@ -98,6 +100,7 @@ Slider.prototype.navigation = function () {
       }
     } else if (e.target.classList.contains("slider__item--active")) {
       // open modal
+      // Не впевнений, чи найкраще місце викликати цей метод, але вирішив усе в один ліснер запхати
       this.fullScreen(currentImage);
     }
   });
@@ -111,6 +114,7 @@ Slider.prototype.fullScreen = function (currentImage) {
   this.modalWrapper.append(this.modal);
   this.modal.classList.add("modal");
 
+  // якщо не копіювати, а брати currentImage, то фото буде видалятися в попередньому місці
   let currentImageCopy = currentImage.cloneNode(true);
   this.modal.append(currentImageCopy);
 
@@ -118,11 +122,14 @@ Slider.prototype.fullScreen = function (currentImage) {
   this.closeBtn.classList.add("close-btn");
   this.closeBtn.textContent = "Close";
 
+  //  Приховувую поки модалка відкрита, бо були зверху. Кращих варіантів не придумав
   this.btnPrew.style.visibility = "hidden";
   this.btnNext.style.visibility = "hidden";
 
+  //
   this.modalWrapper.addEventListener("click", (e) => {
     if (e.target === this.closeBtn || e.target != this.modal) {
+      // якщо не видаляти копію, то при наступному відкриванні буде дві картинки в модалці
       currentImageCopy.remove();
       this.modalWrapper.remove();
 
