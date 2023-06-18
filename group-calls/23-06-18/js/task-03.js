@@ -128,7 +128,10 @@ Slider.prototype.fullScreen = function (currentImage) {
 
   //
   this.modalWrapper.addEventListener("click", (e) => {
-    if (e.target === this.closeBtn || e.target != this.modal) {
+    if (
+      e.target === this.closeBtn ||
+      (e.target != this.modal && e.target != currentImageCopy)
+    ) {
       // якщо не видаляти копію, то при наступному відкриванні буде дві картинки в модалці
       currentImageCopy.remove();
       this.modalWrapper.remove();
