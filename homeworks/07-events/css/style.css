@@ -9,17 +9,18 @@ header {
   box-shadow: 0px 2px 20px #371b63;
 }
 
-.header-top {
+.burger-wrapper {
   background-color: #6841a5;
   border-radius: 10px;
   padding: 3px 15px;
   display: flex;
   align-items: center;
+  /* height: 24px; */
 }
 
 .burger-menu {
-  height: 24px;
   width: 30px;
+  height: 24px;
 
   display: flex;
   flex-direction: column;
@@ -29,33 +30,33 @@ header {
   margin-right: 20px;
 }
 
-/* .line::before {
+.line {
   height: 5px;
   background-color: aliceblue;
   border-radius: 30%;
-} */
+}
 
-.line::nth-child(1) {
+.close-btn:nth-child(1) {
   height: 5px;
   rotate: 45deg;
   margin-top: 11px;
-  background-color: aliceblue;
-  border-radius: 30%;
-  transition: 0.3s ease 0.2s;
+  transition: 0.2s ease 0.1s;
 }
-/* .line::nth-child(2) {
+
+.close-btn:nth-child(2) {
+  height: 5px;
   visibility: hidden;
-} */
-.line::nth-child(3) {
+}
+
+.close-btn:nth-child(3) {
   height: 5px;
   rotate: 135deg;
   margin-bottom: 11px;
-  background-color: aliceblue;
-  border-radius: 30%;
-  transition: 0.3s ease 0.2s;
+  transition: 0.2s ease 0.1s;
 }
 
-p {
+p,
+li {
   font-family: sans-serif;
   font-weight: 300;
   text-align: center;
@@ -66,116 +67,31 @@ p {
   border-radius: 10px;
   margin-top: 10px;
   background-color: #ffffff;
-  display: flex;
   justify-content: space-evenly;
+  display: flex;
 }
 
-.burger-list p {
+.burger-list li {
   cursor: pointer;
+  list-style: none;
 }
 
-.burger-list p:focus {
+.burger-list li:focus {
   font-weight: 600;
 }
 
+.disabled {
+  display: none;
+  transition: 1s ease-in;
+  opacity: 100%;
+}
+
 /* TASK-2 */
-/* .root-cursor {
+.root-cursor {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   border: 2px solid;
   position: absolute;
   transition: 0.3s;
-} */
-
-/* TASK-3 */
-/* .title {
-  color: mintcream;
-  text-transform: uppercase;
-  margin-top: 3em;
-  margin-bottom: 3em;
-  font-size: 1em;
-  letter-spacing: 0.3em;
 }
-.keyboard {
-  display: flex;
-  flex-direction: column;
-}
-.row {
-  list-style: none;
-  display: flex;
-}
-li {
-  height: 3em;
-  width: 3em;
-  color: rgba(0, 0, 0, 0.7);
-  border-radius: 0.4em;
-  line-height: 3em;
-  letter-spacing: 1px;
-  margin: 0.4em;
-  transition: 0.3s;
-  text-align: center;
-  font-size: 1em;
-}
-#tab {
-  width: 5em;
-}
-#caps {
-  width: 6em;
-}
-#left-shift {
-  width: 8em;
-}
-#enter {
-  width: 6em;
-}
-#right-shift {
-  width: 8em;
-}
-#back {
-  width: 5em;
-}
-.pinky {
-  background-color: crimson;
-}
-.pinky.selected {
-  color: crimson;
-}
-.ring {
-  background-color: coral;
-}
-.ring.selected {
-  color: coral;
-}
-.middle {
-  background-color: darkorange;
-}
-.middle.selected {
-  color: darkorange;
-}
-.pointer1st {
-  background-color: gold;
-}
-.pointer1st.selected {
-  color: gold;
-}
-.pointer2nd {
-  background-color: khaki;
-}
-.pointer2nd.selected {
-  color: khaki;
-}
-.fill-out-key {
-  background-color: slategrey;
-}
-.hit {
-  animation: hit 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-}
-@keyframes hit {
-  0% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-} */
