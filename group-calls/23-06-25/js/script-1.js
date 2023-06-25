@@ -25,6 +25,7 @@ function Stopwatch() {
   this.stopwatchWrapper = document.createElement("div");
   this.timer = document.createElement("h2");
   this.time = 0;
+  this.lapTime = 0;
   this.lapN = 1;
   this.buttonsWrapper = document.createElement("div");
   this.btnStop = document.createElement("button");
@@ -63,7 +64,7 @@ Stopwatch.prototype.render = function (parent) {
 
   this.btnStop.textContent = "Stop";
   this.btnStart.textContent = "Start";
-  this.timer.textContent = `${this.formatTime()}`;
+  this.timer.textContent = `${this.formatTime(this.time)}`;
 
   this.btnStop.dataset.action = "stop";
   this.btnStart.dataset.action = "start";
@@ -94,13 +95,15 @@ Stopwatch.prototype.stop = function () {
 
 Stopwatch.prototype.lap = function () {
   const lap = document.createElement("p");
-  lap.textContent = `Lap${this.lapN++} : ${this.formatTime(this.time)}`;
+  lap.textContent = `Lap${this.lapN++} : ${this.formatTime(this.lapTime)}`;
   this.lapsWrapper.append(lap);
+  this.lapTime = 0;
 };
 
 Stopwatch.prototype.reset = function () {
   this.time = 0;
-  this.timer.textContent = `${this.formatTime()}`;
+  this.lapTime = 0;
+  this.timer.textContent = `${this.formatTime(this.time)}`;
 
   this.lapN = 1;
 
@@ -132,14 +135,15 @@ Stopwatch.prototype.continue = function () {
 Stopwatch.prototype.startTimer = function () {
   const startTimer = setInterval(() => {
     this.time++;
-    this.timer.textContent = `${this.formatTime()}`;
+    this.lapTime++;
+    this.timer.textContent = `${this.formatTime(this.time)}`;
   }, 10);
 
   this.intervalID = startTimer;
 };
 
-Stopwatch.prototype.formatTime = function () {
-  let formattedTime = Array.from(this.time.toString().padStart(6, "0"));
+Stopwatch.prototype.formatTime = function (time) {
+  let formattedTime = Array.from(time.toString().padStart(6, "0"));
   formattedTime.splice(2, 0, `:`);
   formattedTime.splice(5, 0, `,`);
   let result = formattedTime.join("");
