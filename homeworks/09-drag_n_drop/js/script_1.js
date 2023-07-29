@@ -15,32 +15,53 @@ function Trello() {
   this.createColumnBtn = document.querySelector(".form__add-column");
 }
 
-Trello.prototype.handleAddTask = function () {
-  const createCard = (e) => {
-    e.preventDefault();
-    let card = new Card();
-    let cardTitle = document.querySelector(".form__field").value;
-    let cardColorIndex = this.cardColorDropdown.options["selectedIndex"];
-    let cardColor = this.cardColorDropdown.options[cardColorIndex].value;
-    if (cardTitle.length > 0) {
-      card.create(cardTitle, cardColor);
-    }
-  };
-  this.createCardBtn.addEventListener("click", createCard);
+Trello.prototype.render = function () {
+  this.createCardBtn.addEventListener("click", (event) => {
+    this.handleAddCard(event);
+  });
+
+  this.createColumnBtn.addEventListener("click", (event) => {
+    this.handleAddColumn(event);
+  });
+
+  // query all columns
+  this.columns = document.querySelectorAll(".trello__column");
+  this.columns.forEach((item) => {
+    item.addEventListener("mousedown", (e) => {
+      console.log("mousedown");
+    });
+  });
+
+  // query all cards
+  this.cards = document.querySelectorAll(".trello__card");
+  this.cards.forEach((item) => {
+    item.addEventListener("mousedown", (e) => {
+      console.log("mousedown card");
+    });
+  });
 };
 
-Trello.prototype.handleAddColumn = function (parent) {
+// Trello.prototype.handleMove = function (event) {}
+
+Trello.prototype.handleAddCard = function (event) {
+  event.preventDefault();
+  let card = new Card();
+  let cardTitle = document.querySelector(".form__field").value;
+  let cardColorIndex = this.cardColorDropdown.options["selectedIndex"];
+  let cardColor = this.cardColorDropdown.options[cardColorIndex].value;
+  if (cardTitle.length > 0) {
+    card.create(cardTitle, cardColor);
+  }
+};
+
+Trello.prototype.handleAddColumn = function (event) {
+  event.preventDefault();
+  let column = new Column();
+  column.create();
+};
+
+function Card(parent = document.querySelector(".trello__column")) {
   this.parent = parent;
-  const createColumn = (e) => {
-    e.preventDefault();
-    let column = new Column();
-    column.create(this.parent);
-  };
-  this.createColumnBtn.addEventListener("click", createColumn);
-};
-
-function Card() {
-  this.parent = document.querySelector(".trello__column");
   this.card = document.createElement("div");
 }
 
@@ -51,22 +72,22 @@ Card.prototype.create = function (title, color) {
   this.parent.append(this.card);
 };
 
-function Column() {
+function Column(parent = document.querySelector(".trello")) {
+  this.parent = parent;
   this.column = document.createElement("div");
 }
 
-Column.prototype.create = function (parent) {
+Column.prototype.create = function () {
   this.column.classList.add("trello__column");
-  parent.append(this.column);
+
+  this.parent.append(this.column);
 };
 
+// TODO: Implement
 Column.prototype.handleMove = function () {
-  item.addEventListener("mousedown", this.handle
+  console.log("123");
 };
 
 //---------------------------------------------------------------------------------
-
-let parent = document.querySelector(".trello");
 let trello = new Trello();
-trello.handleAddTask();
-trello.handleAddColumn(parent);
+trello.render();
