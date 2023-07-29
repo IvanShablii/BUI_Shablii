@@ -1,0 +1,75 @@
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  -ms-user-select: none;
+  user-select: none;
+}
+* {
+  font-family: system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+/* 
+main {
+  width: min(80ch, calc(100% - 2rem));
+  margin-inline: auto;
+  padding: 3em;
+  display: block;
+} */
+
+body {
+  display: flex;
+  padding: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  margin: 10px;
+}
+
+.form__select {
+  margin: 10px 0;
+}
+.form__add-column {
+  margin-top: 25px;
+}
+
+.trello {
+  display: flex;
+  flex-direction: row;
+}
+
+.trello__column {
+  margin: 10px;
+  width: 250px;
+  background-color: darkslategray;
+  padding: 10px;
+  border-radius: 10px;
+  height: 80vh;
+  overflow: scroll;
+}
+
+.trello__card {
+  overflow: clip;
+  background-color: royalblue;
+  padding: 10px;
+  margin: 10px 0px;
+  height: 50px;
+}
+
+.trello__card.green {
+  background-color: green;
+}
+.trello__card.yellow {
+  background-color: yellow;
+  color: black;
+}
+.trello__card.red {
+  background-color: red;
+}

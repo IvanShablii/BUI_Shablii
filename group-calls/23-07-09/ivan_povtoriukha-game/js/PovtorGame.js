@@ -2,6 +2,8 @@ function PovtorGame(levels, currentUser) {
   this.user = currentUser;
   this.levels = levels;
   this.currentLevelIndex = currentUser.level;
+  this.userClicked = [];
+  this.allowClick = false;
 
   Object.defineProperty(this, "levelWidth", {
     get() {
@@ -60,6 +62,14 @@ PovtorGame.prototype.render = function (parent) {
     e.stopImmediatePropagation();
   });
 
+  // add event listened only when the game begins, to prevent clickiing before it happens
+  this.squaresWrapper.addEventListener("click", (e) => {
+    if (this.allowClick) {
+      this.handleRepeatPattern(e);
+    }
+    e.stopImmediatePropagation();
+  });
+
   this.squaresWrapper.style.gridTemplateColumns = `repeat(${this.levelWidth}, 1fr)`;
 
   this.gameWrapper.append(this.gameName, this.squaresWrapper, this.startBtn);
@@ -76,6 +86,7 @@ PovtorGame.prototype.startGame = function () {
 
     if (this.pattern.length === 0) {
       clearInterval(interval);
+      this.allowClick = true;
       activeEl?.classList.remove("active");
       return;
     }
@@ -90,37 +101,27 @@ PovtorGame.prototype.startGame = function () {
   }, 500);
 
   console.log(this.highlightedNumbers + " highlightedNumbers");
-
-  typeof userClicked === "undefined" ? (userClicked = []) : (userClicked = []);
-
-  // add event listened only when the game begins, to prevent clickiing before it happens
-  if (this.squaresWrapper.getAttribute("listener") !== "true") {
-    this.squaresWrapper.addEventListener("click", (e) => {
-      this.handleRepeatPattern(e, userClicked);
-      console.log(userClicked);
-      e.stopImmediatePropagation();
-    });
-  }
 };
 
-PovtorGame.prototype.handleRepeatPattern = function (e, userClicked) {
+PovtorGame.prototype.handleRepeatPattern = function (e) {
   if (e.target.className === "square") {
     e.target.classList.add("active");
-    userClicked.push(e.target.dataset.number);
+    this.userClicked.push(e.target.dataset.number);
   }
 
-  if (userClicked.length === this.levelRepeat) {
+  if (this.userClicked.length === this.levelRepeat) {
+    this.allowClick = false;
     // довелось додати таймаут, щоб встигало дофарбувати останню клітинку, бо у нас там транзішн
     setTimeout(() => {
-      this.gameResult(userClicked);
+      this.gameResult();
     }, 400);
   }
 };
 
-PovtorGame.prototype.gameResult = function (userClicked) {
-  if (this.highlightedNumbers.toString() !== userClicked.toString()) {
+PovtorGame.prototype.gameResult = function () {
+  if (this.highlightedNumbers.toString() !== this.userClicked.toString()) {
     alert(
-      `You failed. You clicked ${userClicked.toString()} when pattern was ${this.highlightedNumbers.toString()}`
+      `You failed. You clicked ${this.userClicked.toString()} when pattern was ${this.highlightedNumbers.toString()}`
     );
   } else if (this.currentLevelIndex < this.levels.length - 1) {
     this.currentLevelIndex++;
@@ -134,6 +135,7 @@ PovtorGame.prototype.gameResult = function (userClicked) {
     localStorage.setItem("povtorGameSaves", JSON.stringify(povtorGameSaves)); // записуємо юзера в локалсторедж
 
     // remove all HTML inside wrapper
+    this.userClicked = [];
     this.squaresWrapper.replaceChildren();
     this.squaresWrapper.style.gridTemplateColumns = `repeat(${this.levelWidth}, 1fr)`;
     this.render(this.parent);
