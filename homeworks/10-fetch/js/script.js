@@ -22,12 +22,11 @@
 
 function Dog(url) {
   this.url = url;
-
-  this.wrapper = document.querySelector(".wrapper");
   this.image = document.createElement("img");
 }
 
-Dog.prototype.render = function () {
+Dog.prototype.render = function (parent) {
+  this.wrapper = parent;
   this.image.src = this.url;
   this.wrapper.append(this.image);
 };
@@ -36,6 +35,8 @@ function ShowDogs() {
   this.submitBtn = document.querySelector(".form__submit");
   this.formInput = document.querySelector(".form__field");
   this.countOfDogs = 0;
+  this.wrapper = document.querySelector(".wrapper");
+  this.notANumber = document.createElement("p");
 }
 
 ShowDogs.prototype.render = function () {
@@ -46,20 +47,30 @@ ShowDogs.prototype.render = function () {
 
 ShowDogs.prototype.handleSubmit = function (event) {
   event.preventDefault();
+
+  this.wrapper.replaceChildren();
+
   this.countOfDogs = this.formInput.value;
 
-  if (!isNaN(+this.countOfDogs) && this.countOfDogs > 0) {
-    let image;
-    let dog;
+  if (
+    !isNaN(+this.countOfDogs) &&
+    this.countOfDogs > 0 &&
+    this.countOfDogs <= 100
+  ) {
+    // let dog;
     for (let i = 0; i < this.countOfDogs; i++) {
       // fetch
-      image = fetch("https://dog.ceo/api/breeds/image/random")
+      fetch("https://dog.ceo/api/breeds/image/random")
         .then((data) => data.json())
         .then((data) => {
-          dog = new Dog(data.message);
-          dog.render();
+          let dog = new Dog(data.message);
+          dog.render(this.wrapper);
         });
     }
+  } else if (isNaN(+this.countOfDogs)) {
+    this.notANumber.textContent = "Value should be a number between 0 and 100";
+    this.notANumber.style.color = "red";
+    this.wrapper.append(this.notANumber);
   }
 };
 

@@ -1,3 +1,31 @@
+* {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  -ms-user-select: none;
+  user-select: none;
+}
+* {
+  font-family: system-ui, sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+main {
+  width: min(80ch, calc(100% - 2rem));
+  margin-inline: auto;
+  padding: 3em;
+  display: block;
+}
+/* *******************************************/
+
+body {
+  margin: 3em;
+}
+
 img {
   display: inline-flex;
   width: 300px;
